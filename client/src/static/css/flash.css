@@ -1,0 +1,16 @@
+.flash {
+    position: fixed;
+    top: 30px;
+    right: 0px;
+    color: var(--bg_col);
+    font-family: 'Glory', sans-serif;
+    padding:10px 20px;
+    padding-right: 40px;
+    background-color: var(--white_col);
+    transform: translateX(100%);
+    transition: .2s ease;
+}
+
+.f-act {
+    transform: translateX(0px);
+}
