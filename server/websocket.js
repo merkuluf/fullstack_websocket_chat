@@ -2,7 +2,6 @@ import ws from 'ws';
 const { Server } = ws;
 import { v4 as uuid } from 'uuid';
 
-// This function will be exported and used in the main server file
 export function initializeWebSocket(httpServer) {
     const clients = {};
     const messages = [];
@@ -16,12 +15,17 @@ export function initializeWebSocket(httpServer) {
         ws.send(JSON.stringify(messages));
 
         ws.on('message', (rawMessage) => {
-            const { name, message } = JSON.parse(rawMessage);
-            messages.push({ name, message });
-            console.log(messages)
+            const { name, message, room } = JSON.parse(rawMessage);
+            const timestamp = new Date().toISOString(); // Create a timestamp
 
+            // Add the message along with the timestamp
+            const messageWithTimestamp = { name, message, timestamp, room };
+            messages.push(messageWithTimestamp);
+            console.log(messages);
+
+            // Send the message to all clients
             for (const id in clients) {
-                clients[id].send(JSON.stringify([{ name, message }]));
+                clients[id].send(JSON.stringify([messageWithTimestamp]));
             }
         });
 
@@ -38,5 +42,4 @@ export function initializeWebSocket(httpServer) {
             process.exit(0); // This ensures the process exits
         });
     });
-    
 }

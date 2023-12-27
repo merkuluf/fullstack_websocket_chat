@@ -158,7 +158,7 @@ function Home() {
                         </>
                         }
                     </div>
-                    <form>
+                    <form className="home-form">
                         <input
                             onChange={handleChangeInput}
                             placeholder='username'

@@ -1,0 +1,57 @@
+.messages {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 70vh;
+    margin-bottom: 45px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    padding-top: 5px;
+}
+
+.messages p {
+    margin: 0;
+}
+
+.message-wrapper {
+    width: 95%;
+    display: flex;
+    position: relative;
+
+}
+
+.message {
+    color: var(--bg_col);
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #b5e7bb5c;
+    color: var(--whte_col);
+    position: relative;
+    min-width: 50%;
+}
+
+
+.from-sender {
+    flex-direction: row-reverse;
+}
+
+
+
+
+
+
+.message-timestamp {
+    position: absolute;
+    font-size: .75rem;
+    right: 6px;
+    bottom: 2px;
+    opacity: 80%;
+}
+
+.message-username {
+    font-weight: 500;
+    font-size: 1.1rem;
+}

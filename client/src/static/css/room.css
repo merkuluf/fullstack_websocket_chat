@@ -1,0 +1,24 @@
+.room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    
+}
+
+.chat-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    width: calc(90% - 10px);
+    max-width: 510px;
+    border: 5px solid var(--green_disabled_col);
+    padding: 0px 0px;
+    margin-bottom: 2rem;
+    gap: 20px;
+
+    position: relative;
+}

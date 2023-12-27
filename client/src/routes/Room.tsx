@@ -4,10 +4,17 @@ import { route } from "preact-router";
 import { useState, useEffect, useRef } from "preact/hooks";
 import axios from "axios";
 import { USER } from "../redux/actionTypes";
+import '../static/css/room.css'
+import back_svg from '../static/img/back.svg'
+import UserHead from "../components/UserHead";
+import ChatInput from "../components/ChatInput";
+import Message from "../components/Message";
 
 interface IMessage {
     name: string;
     message: string;
+    timestamp: string;
+    room: string;
 }
 
 function Room() {
@@ -20,6 +27,8 @@ function Room() {
     const user = useSelector((state: RootState) => state.user);
 
     const [messages, setMessages] = useState<IMessage[]>([]);
+    const thisRoomMessages = messages.filter((message: IMessage) => message.room === id);
+
 
     useEffect(() => {
         const _token = localStorage.getItem('token');
@@ -70,30 +79,58 @@ function Room() {
         };
     }, []);
 
-    function handleSendMessage() {
+    function handleSendMessage(e: Event) {
+        e.preventDefault()
         if (ws !== null && msgRef.current) {
             ws.send(JSON.stringify({
-                name: user.username, message: msgRef.current.value
+                name: user.username, 
+                message: msgRef.current.value,
+                room: id,
             }));
             msgRef.current.value = ''; // Clear the input field after sending the message
         }
     }
 
+    const messagesEndRef = useRef<HTMLInputElement>(null);
+
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]); // Dependency array ensures this runs when 'messages' changes
+
+
+
     return (
         <div className="room">
-            <div className='room-info'>
-                <button onClick={handleGoBack}>back</button>
-                <p>Room {id}</p>
-                <p>User {user.username}</p>
-            </div>
-            <div className="chat">
-                <input ref={msgRef} placeholder="type something"></input>
-                <button onClick={handleSendMessage}>send</button>
-            </div>
-            <div className="messages">
-                {messages.map((item, index) => (
-                    <p key={index}>{item.name}: {item.message}</p>
-                ))}
+            <UserHead
+                actionFunction={handleGoBack}
+                icon_svg={back_svg}
+                user={user}
+                txt_content={`Room #${id}`}
+            />
+            <div className="chat-parent">
+                <ChatInput
+                    msgRef={msgRef}
+                    handleSendMessage={handleSendMessage}
+                />
+                <div className="messages">
+                    {thisRoomMessages.map((item, index) => {
+                        return <Message
+                            role={user.username === item.name ? 0 : 1}
+                            index={index}
+                            message={item.message}
+                            timestamp={item.timestamp}
+                            username={item.name}
+                        />
+                    })}
+                    <div ref={messagesEndRef} /> {/* Invisible element at the end of messages */}
+
+                </div>
+
             </div>
         </div>
     );

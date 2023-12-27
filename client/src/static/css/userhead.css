@@ -1,0 +1,75 @@
+.txt-content {
+    position: absolute;
+    right: 60px;
+}
+
+.userhead-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(90% - 20px);
+    max-width: 500px;
+    background-color: var(--green_disabled_col);
+    padding: 10px 0px;
+    padding-left: 20px;
+
+    gap: 20px;
+    margin-top: 2rem;
+
+    position: relative;
+}
+
+.userhead-parent p {
+    font-size: 2rem;
+    margin: 0;
+    font-family: 'Glory', sans-serif;
+    font-weight: 500;
+}
+
+.userhead-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(108, 37, 108, 0.892);
+    color: var(--white_col);
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    user-select: none;
+}
+
+
+.userhead-action-button {
+    position: absolute;
+    right: 8px;
+    /* top: 8px;
+    bottom: 8px; */
+    border: 0px solid transparent;
+
+
+    cursor: pointer;
+    background-color: transparent;
+    padding: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: .2s ease;
+}
+
+.userhead-action-buttonn:hover {
+    scale: 96%;
+    opacity: 80%;
+}
+
+.userhead-action-buttonn:active {
+    opacity: 100%;
+    
+}
+

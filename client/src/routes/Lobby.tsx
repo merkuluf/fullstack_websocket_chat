@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { USER } from "../redux/actionTypes"
 import { RootState } from "../interfaces/redux.interfaces"
 import '../static/css/lobby.css'
+import logout_svg from '../static/img/logout.svg'
+import UserHead from "../components/UserHead"
+
 
 function Lobby() {
 
@@ -76,13 +79,18 @@ function Lobby() {
 
     return (
         <div className="lobby">
-            <div className='user-profile'>
+            <UserHead 
+                user={user}
+                actionFunction={handleLogout}
+                icon_svg={logout_svg}
+            />
+            {/* <div className='user-profile'>
                 <div className="avatar">{user.username.slice(0, 1)}</div>
                 <p>{user.username}</p>
                 <button className="logout-button" onClick={handleLogout}>
-                    logout
+                    <img className="icon" src={logout_svg}></img>
                 </button>
-            </div>
+            </div> */}
             {roomsAmt.map((item, index) => {
                 return <button
                     className="main-button"
@@ -91,7 +99,7 @@ function Lobby() {
                     id={index}
                     onClick={handleRedirect}
                 >
-                    Server #{item}
+                    Room #{item}
                 </button>
             })}
 

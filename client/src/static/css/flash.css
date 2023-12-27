@@ -9,6 +9,8 @@
     background-color: var(--white_col);
     transform: translateX(100%);
     transition: .2s ease;
+    z-index: 99;
+    user-select: none;
 }
 
 .f-act {
